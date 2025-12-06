@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: quantum-bot-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: quantum_bot
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - quantum-network
+
+  backend:
+    build: ./backend
+    container_name: quantum-bot-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/quantum_bot
+    depends_on:
+      - mongodb
+    networks:
+      - quantum-network
+    volumes:
+      - ./backend/logs:/app/logs
+
+  frontend:
+    image: nginx:alpine
+    container_name: quantum-bot-frontend
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+    networks:
+      - quantum-network
+
+networks:
+  quantum-network:
+    driver: bridge
+
+volumes:
+  mongo_data:

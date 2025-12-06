@@ -1,0 +1,45 @@
+[name]
+name = "quantum-bot"
+
+[build]
+builder = "dockerfile"
+dockerfile = "./Dockerfile"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[variables]
+PORT = "3000"
+NODE_ENV = "production"
+TELEGRAM_BOT_TOKEN = "@TK:TELEGRAM_BOT_TOKEN"
+TELEGRAM_WEBHOOK_SECRET = "quantum_webhook_2024"
+MONGODB_URI = "@TK:MONGODB_URI"
+JWT_SECRET = "change_this_to_random_string_32_chars"
+
+[[services]]
+name = "quantum-bot"
+port = 3000
+domain = "quantum-bot.up.railway.app"
+
+[services.env]
+PORT = "3000"
+NODE_ENV = "production"
+
+[[services.checks]]
+type = "http"
+path = "/health"
+interval = 30
+timeout = 3
+name = "app-health"
+
+[[databases]]
+name = "quantum-db"
+type = "mongodb"
+plan = "starter"
+
+[databases.env]
+MONGODB_URI = "mongodb://mongo:27017/quantum_bot"

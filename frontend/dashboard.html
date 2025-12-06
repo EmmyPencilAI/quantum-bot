@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Bot Dashboard | Advanced Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/components.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+
+<body>
+    <!-- Simplified Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="images/logo.png" alt="Quantum Bot" height="32" class="me-2">
+                <span class="fw-bold">Quantum Bot Dashboard</span>
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">
+                    <i class="bi bi-house me-1"></i> Home
+                </a>
+                <a class="nav-link" href="https://t.me/quantumbroker_bot" target="_blank">
+                    <i class="bi bi-telegram me-1"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-12">
+                <!-- Stats Summary -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-3">
+                        <div class="stats-card card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-2">Total Signals</h6>
+                                        <h3 class="fw-bold" id="totalSignals">1,245</h3>
+                                    </div>
+                                    <i class="bi bi-bell fs-1 text-primary"></i>
+                                </div>
+                                <div class="small text-success">
+                                    <i class="bi bi-arrow-up-right"></i> 24 today
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-3">
+                        <div class="stats-card card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-2">Accuracy Rate</h6>
+                                        <h3 class="fw-bold text-success" id="dashboardAccuracy">92.4%</h3>
+                                    </div>
+                                    <i class="bi bi-check-circle fs-1 text-success"></i>
+                                </div>
+                                <div class="small text-success">
+                                    <i class="bi bi-arrow-up-right"></i> 3.1% improvement
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-3">
+                        <div class="stats-card card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-2">QUBIC Price</h6>
+                                        <h3 class="fw-bold" id="dashboardPrice">$0.002156</h3>
+                                    </div>
+                                    <i class="bi bi-lightning fs-1 text-warning"></i>
+                                </div>
+                                <div class="small text-success">
+                                    <i class="bi bi-arrow-up-right"></i> +5.42% 24h
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-3">
+                        <div class="stats-card card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted mb-2">Active Users</h6>
+                                        <h3 class="fw-bold" id="dashboardUsers">1,245</h3>
+                                    </div>
+                                    <i class="bi bi-people fs-1 text-info"></i>
+                                </div>
+                                <div class="small text-success">
+                                    <i class="bi bi-arrow-up-right"></i> 45 new today
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <div class="col-xl-8 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Performance Analytics</h5>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-secondary active">Signals</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Revenue</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Users</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="performanceChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">Signal Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="distributionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Signals Table -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Recent Trading Signals</h5>
+                        <a href="/" class="btn btn-sm btn-outline-primary">View All</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-4">Time</th>
+                                        <th>Symbol</th>
+                                        <th>Type</th>
+                                        <th class="text-end">Price</th>
+                                        <th class="text-end">Target</th>
+                                        <th class="text-end">Stop Loss</th>
+                                        <th class="text-end">Confidence</th>
+                                        <th class="text-end pe-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashboardSignals">
+                                    <!-- Signals loaded via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <a href="https://t.me/quantumbroker_bot" class="btn btn-primary w-100" target="_blank">
+                                    <i class="bi bi-telegram me-2"></i>Open Telegram
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <button class="btn btn-success w-100" onclick="generateTestSignal()">
+                                    <i class="bi bi-plus-circle me-2"></i>New Signal
+                                </button>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <button class="btn btn-info w-100" onclick="refreshAllData()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Refresh Data
+                                </button>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <button class="btn btn-warning w-100" onclick="exportData()">
+                                    <i class="bi bi-download me-2"></i>Export Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5 pt-4 border-top border-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="small text-muted">
+                        &copy; 2024 Quantum Bot. Real-time Qubic Blockchain monitoring.
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="small text-muted">
+                        Data updates every 5 minutes • Last updated: <span id="lastUpdated">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

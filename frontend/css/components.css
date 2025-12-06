@@ -1,0 +1,358 @@
+/* Component Styles */
+
+/* Crypto Row */
+.crypto-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.crypto-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.crypto-rank {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.crypto-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.crypto-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+.crypto-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.crypto-symbol {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.crypto-fullname {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.crypto-price {
+    text-align: right;
+    font-weight: 600;
+    width: 150px;
+}
+
+.crypto-change {
+    text-align: right;
+    width: 100px;
+    font-weight: 600;
+}
+
+.crypto-change.positive {
+    color: var(--success);
+}
+
+.crypto-change.negative {
+    color: var(--danger);
+}
+
+.crypto-marketcap {
+    text-align: right;
+    width: 150px;
+    color: var(--text-secondary);
+}
+
+.crypto-volume {
+    text-align: right;
+    width: 150px;
+    color: var(--text-secondary);
+}
+
+.crypto-supply {
+    text-align: right;
+    width: 150px;
+    color: var(--text-secondary);
+}
+
+.crypto-signal {
+    text-align: center;
+    width: 100px;
+}
+
+/* Signal Card */
+.signal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.signal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+}
+
+.signal-card.buy::before {
+    background: var(--success);
+}
+
+.signal-card.sell::before {
+    background: var(--danger);
+}
+
+.signal-card.alert::before {
+    background: var(--warning);
+}
+
+.signal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary);
+}
+
+.signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.signal-symbol {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.signal-type {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.signal-type.buy {
+    background: linear-gradient(135deg, rgba(25, 135, 84, 0.2), rgba(25, 135, 84, 0.1));
+    color: var(--success);
+    border: 1px solid rgba(25, 135, 84, 0.3);
+}
+
+.signal-type.sell {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(220, 53, 69, 0.1));
+    color: var(--danger);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.signal-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.signal-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.signal-meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.signal-meta-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.signal-meta-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.signal-confidence {
+    margin-bottom: 1rem;
+}
+
+.confidence-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.confidence-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.confidence-fill.high {
+    background: var(--gradient-success);
+}
+
+.confidence-fill.medium {
+    background: var(--gradient-primary);
+}
+
+.confidence-fill.low {
+    background: var(--gradient-danger);
+}
+
+.signal-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.signal-actions .btn {
+    flex: 1;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+}
+
+/* Loading States */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Badge Variants */
+.badge-outline {
+    background: transparent;
+    border: 1px solid currentColor;
+}
+
+/* Progress Bars */
+.progress-thin {
+    height: 4px;
+    border-radius: 2px;
+}
+
+/* News Cards */
+.news-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+}
+
+.news-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.news-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.news-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.news-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Tooltip Customization */
+.tooltip {
+    font-size: 0.75rem;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* Utility Classes */
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glow {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
