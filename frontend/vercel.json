@@ -1,0 +1,80 @@
+{
+    "version": 2,
+    "name": "quantum-bot",
+    "builds": [
+        {
+            "src": "*.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "css/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "js/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "images/*",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/dashboard",
+            "dest": "/dashboard.html"
+        },
+        {
+            "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
+            "headers": {
+                "Cache-Control": "public, max-age=31536000, immutable"
+            }
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html",
+            "status": 200
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://quantum-bot-api.vercel.app/api/:path*"
+        },
+        {
+            "source": "/webhook/:path*",
+            "destination": "https://quantum-bot-api.vercel.app/webhook/:path*"
+        },
+        {
+            "source": "/health",
+            "destination": "https://quantum-bot-api.vercel.app/health"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "1; mode=block"
+                }
+            ]
+        }
+    ],
+    "github": {
+        "silent": false,
+        "autoAlias": true
+    }
+}
