@@ -1,109 +1,10 @@
-/* Component Styles */
-
-/* Crypto Row */
-.crypto-row {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    transition: all 0.2s;
-}
-
-.crypto-row:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-}
-
-.crypto-rank {
-    width: 40px;
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-.crypto-info {
-    display: flex;
-    align-items: center;
-    flex: 1;
-}
-
-.crypto-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-size: 1.2rem;
-}
-
-.crypto-name {
-    display: flex;
-    flex-direction: column;
-}
-
-.crypto-symbol {
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.crypto-fullname {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.crypto-price {
-    text-align: right;
-    font-weight: 600;
-    width: 150px;
-}
-
-.crypto-change {
-    text-align: right;
-    width: 100px;
-    font-weight: 600;
-}
-
-.crypto-change.positive {
-    color: var(--success);
-}
-
-.crypto-change.negative {
-    color: var(--danger);
-}
-
-.crypto-marketcap {
-    text-align: right;
-    width: 150px;
-    color: var(--text-secondary);
-}
-
-.crypto-volume {
-    text-align: right;
-    width: 150px;
-    color: var(--text-secondary);
-}
-
-.crypto-supply {
-    text-align: right;
-    width: 150px;
-    color: var(--text-secondary);
-}
-
-.crypto-signal {
-    text-align: center;
-    width: 100px;
-}
-
-/* Signal Card */
+/* Signal Cards */
 .signal-card {
-    background: var(--bg-card);
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -129,12 +30,6 @@
     background: var(--warning);
 }
 
-.signal-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    border-color: var(--primary);
-}
-
 .signal-header {
     display: flex;
     justify-content: space-between;
@@ -145,7 +40,6 @@
 .signal-symbol {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text-primary);
 }
 
 .signal-type {
@@ -154,17 +48,16 @@
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .signal-type.buy {
-    background: linear-gradient(135deg, rgba(25, 135, 84, 0.2), rgba(25, 135, 84, 0.1));
+    background: rgba(25, 135, 84, 0.1);
     color: var(--success);
     border: 1px solid rgba(25, 135, 84, 0.3);
 }
 
 .signal-type.sell {
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(220, 53, 69, 0.1));
+    background: rgba(220, 53, 69, 0.1);
     color: var(--danger);
     border: 1px solid rgba(220, 53, 69, 0.3);
 }
@@ -173,7 +66,6 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
 }
 
 .signal-meta {
@@ -195,11 +87,6 @@
 
 .signal-meta-value {
     font-weight: 600;
-    color: var(--text-primary);
-}
-
-.signal-confidence {
-    margin-bottom: 1rem;
 }
 
 .confidence-bar {
@@ -213,34 +100,72 @@
 .confidence-fill {
     height: 100%;
     border-radius: 3px;
-    transition: width 0.3s ease;
 }
 
 .confidence-fill.high {
-    background: var(--gradient-success);
+    background: linear-gradient(90deg, var(--success), #20c997);
 }
 
 .confidence-fill.medium {
-    background: var(--gradient-primary);
+    background: linear-gradient(90deg, var(--primary), #6366f1);
 }
 
 .confidence-fill.low {
-    background: var(--gradient-danger);
+    background: linear-gradient(90deg, var(--danger), #f06595);
 }
 
-.signal-actions {
+/* Crypto rows */
+.crypto-row {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.signal-actions .btn {
-    flex: 1;
+.crypto-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.crypto-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.crypto-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.crypto-symbol {
+    font-weight: 600;
+}
+
+.crypto-fullname {
     font-size: 0.875rem;
-    padding: 0.5rem;
+    color: var(--text-secondary);
 }
 
-/* Loading States */
+/* News cards */
+.news-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Loading animations */
 .loading {
     display: inline-block;
     width: 20px;
@@ -257,57 +182,63 @@
     }
 }
 
-/* Badge Variants */
+/* Progress bars */
+.progress {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    background-color: var(--primary);
+}
+
+/* Badge variants */
 .badge-outline {
     background: transparent;
     border: 1px solid currentColor;
 }
 
-/* Progress Bars */
-.progress-thin {
-    height: 4px;
-    border-radius: 2px;
+/* Animations */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
-/* News Cards */
-.news-card {
-    background: var(--bg-card);
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Tooltips */
+.tooltip-inner {
+    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s;
 }
 
-.news-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: var(--border-color);
 }
 
-.news-time {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: var(--border-color);
 }
 
-.news-title {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: var(--border-color);
 }
 
-.news-excerpt {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: var(--border-color);
 }
 
-/* Tooltip Customization */
-.tooltip {
-    font-size: 0.75rem;
-}
-
-/* Scrollbar Styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -315,7 +246,6 @@
 
 ::-webkit-scrollbar-track {
     background: var(--bg-secondary);
-    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -325,34 +255,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-secondary);
-}
-
-/* Utility Classes */
-.gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.glow {
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
-    }
 }

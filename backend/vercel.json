@@ -1,59 +1,15 @@
 {
     "version": 2,
-    "name": "quantum-bot-api",
     "builds": [
         {
             "src": "src/app.ts",
-            "use": "@vercel/node",
-            "config": {
-                "maxLambdaSize": "50mb",
-                "runtime": "nodejs18.x"
-            }
+            "use": "@vercel/node"
         }
     ],
     "routes": [
         {
-            "src": "/api/(.*)",
-            "dest": "src/app.ts",
-            "methods": [
-                "GET",
-                "POST",
-                "PUT",
-                "DELETE",
-                "OPTIONS"
-            ],
-            "headers": {
-                "Access-Control-Allow-Origin": "https://quantum-bot.vercel.app",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Authorization",
-                "Access-Control-Allow-Credentials": "true"
-            }
-        },
-        {
-            "src": "/webhook/(.*)",
-            "dest": "src/app.ts",
-            "methods": [
-                "POST"
-            ]
-        },
-        {
-            "src": "/health",
-            "dest": "src/app.ts",
-            "methods": [
-                "GET"
-            ]
+            "src": "/(.*)",
+            "dest": "src/app.ts"
         }
-    ],
-    "env": {
-        "NODE_ENV": "production"
-    },
-    "functions": {
-        "src/app.ts": {
-            "maxDuration": 30,
-            "memory": 2048
-        }
-    },
-    "regions": [
-        "iad1"
     ]
 }

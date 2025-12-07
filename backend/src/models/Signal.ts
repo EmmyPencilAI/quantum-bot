@@ -71,8 +71,4 @@ const SignalSchema = new Schema<ISignal>({
     }
 });
 
-// Indexes for faster queries
-SignalSchema.index({ symbol: 1, timestamp: -1 });
-SignalSchema.index({ type: 1, confidence: -1 });
-
 export const Signal = model<ISignal>('Signal', SignalSchema);

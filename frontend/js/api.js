@@ -1,27 +1,10 @@
+// API Service for Quantum Bot
 class QuantumAPI {
     constructor() {
-        // Auto-detect API URL based on environment
-        this.baseURL = this.getApiUrl();
+        // Use your backend URL here
+        this.baseURL = 'https://quantum-bot-api.vercel.app/api';
         this.cache = new Map();
         this.cacheDuration = 30000; // 30 seconds
-
-        console.log(`API Base URL: ${this.baseURL}`);
-    }
-
-    getApiUrl() {
-        // Check if we're in development
-        if (window.location.hostname === 'localhost' ||
-            window.location.hostname === '127.0.0.1') {
-            return 'http://localhost:3000/api';
-        }
-
-        // Check for environment variable (set during Vercel build)
-        if (window.API_URL) {
-            return window.API_URL;
-        }
-
-        // Default production URL (your backend Vercel URL)
-        return 'https://quantum-bot-api.vercel.app/api';
     }
 
     async get(endpoint, useCache = true) {
@@ -35,17 +18,10 @@ class QuantumAPI {
         }
 
         try {
-            const response = await fetch(`${this.baseURL}${endpoint}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                mode: 'cors', // Important for cross-origin requests
-                credentials: 'omit' // Change to 'include' if using cookies
-            });
+            const response = await fetch(`${this.baseURL}${endpoint}`);
 
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`API Error: ${response.status}`);
             }
 
             const data = await response.json();
@@ -60,15 +36,7 @@ class QuantumAPI {
             return data;
         } catch (error) {
             console.error(`API Fetch Error (${endpoint}):`, error);
-
-            // Try fallback URL if main API fails
-            if (this.baseURL.includes('vercel.app')) {
-                console.log('Trying fallback API URL...');
-                this.baseURL = 'https://quantum-bot-backup-api.vercel.app/api';
-                return this.get(endpoint, false); // Retry without cache
-            }
-
-            return null;
+            return this.getMockData(endpoint);
         }
     }
 
@@ -78,21 +46,62 @@ class QuantumAPI {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
                 },
-                mode: 'cors',
-                credentials: 'omit',
                 body: JSON.stringify(data)
             });
 
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`API Error: ${response.status}`);
             }
 
             return await response.json();
         } catch (error) {
             console.error(`API Post Error (${endpoint}):`, error);
-            return null;
+            return { success: false, error: error.message };
         }
     }
+
+    getMockData(endpoint) {
+        // Mock data for development
+        switch (endpoint) {
+            case '/signals':
+                return {
+                    success: true,
+                    data: [
+                        {
+                            id: 1,
+                            symbol: 'QUBIC/USDT',
+                            type: 'BUY',
+                            confidence: 92,
+                            price: 0.002156,
+                            target: 0.002500,
+                            stopLoss: 0.001900,
+                            timestamp: new Date().toISOString(),
+                            source: 'Quantum AI'
+                        }
+                    ]
+                };
+
+            case '/market/overview':
+                return {
+                    success: true,
+                    data: {
+                        marketCap: 21560000,
+                        volume24h: 1250000,
+                        activeMiners: 42156,
+                        aiAccuracy: 92.4
+                    }
+                };
+
+            default:
+                return { success: false, error: 'Endpoint not found' };
+        }
+    }
+
+    clearCache() {
+        this.cache.clear();
+    }
 }
+
+// Global instance
+window.quantumAPI = new QuantumAPI();

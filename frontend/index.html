@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Bot | Qubic Blockchain Trading Platform</title>
+
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/components.css" rel="stylesheet">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
@@ -18,30 +31,31 @@
     <div class="top-alert bg-primary text-white py-2">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <span class="badge bg-warning text-dark me-2">NEW</span>
-                <span>🚀 Quantum Bot v2.0 Launched! Real-time Qubic signals now active</span>
+                <span class="badge bg-warning text-dark me-2">LIVE</span>
+                <span>🚀 Quantum Bot v2.0: Real-time Qubic signals | <span id="liveUpdate">Loading
+                        updates...</span></span>
             </div>
             <button class="btn-close btn-close-white" onclick="this.parentElement.style.display='none'"></button>
         </div>
     </div>
 
     <!-- Header Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="images/quantum-logo.png" alt="Quantum Bot" height="32" class="me-2">
-                <span class="fw-bold fs-4 text-gradient">Quantum Bot</span>
+                <span class="fw-bold fs-4 text-primary">Quantum Bot</span>
             </a>
 
             <!-- Search Bar -->
             <div class="d-none d-lg-flex mx-4 flex-grow-1">
                 <div class="input-group search-bar">
-                    <span class="input-group-text bg-transparent border-end-0">
-                        <i class="bi bi-search"></i>
+                    <span class="input-group-text bg-dark border-end-0">
+                        <i class="bi bi-search text-secondary"></i>
                     </span>
-                    <input type="text" class="form-control bg-transparent border-start-0"
-                        placeholder="Search cryptocurrency (e.g., QUBIC, BTC)">
+                    <input type="text" class="form-control bg-dark border-start-0 text-white"
+                        placeholder="Search cryptocurrency (e.g., QUBIC, BTC, ETH)">
                     <button class="btn btn-outline-secondary" type="button">Search</button>
                 </div>
             </div>
@@ -53,7 +67,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-graph-up me-1"></i> Markets
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#"><i class="bi bi-coin me-2"></i>All
                                     Cryptocurrencies</a></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-lightning me-2"></i>Qubic
@@ -90,7 +104,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle"></i>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>My Account</a></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-bell me-2"></i>Notifications</a></li>
@@ -118,7 +132,7 @@
             <div class="col-lg-2 col-xl-2 d-none d-lg-block">
                 <div class="sidebar-sticky">
                     <!-- Market Overview -->
-                    <div class="card mb-3">
+                    <div class="card mb-3 bg-dark">
                         <div class="card-body">
                             <h6 class="card-title text-muted mb-3">MARKET OVERVIEW</h6>
                             <div class="d-flex justify-content-between mb-2">
@@ -143,10 +157,10 @@
                         </div>
                     </div>
 
-                    <!-- Quick Stats -->
-                    <div class="card mb-3">
+                    <!-- Quantum Bot Stats -->
+                    <div class="card mb-3 bg-dark">
                         <div class="card-body">
-                            <h6 class="card-title text-muted mb-3">QUANTUM BOT STATS</h6>
+                            <h6 class="card-title text-muted mb-3">QUANTUM BOT</h6>
                             <div class="stat-item mb-2">
                                 <div class="d-flex justify-content-between">
                                     <span class="small">Signals Today</span>
@@ -168,18 +182,19 @@
                             <div class="stat-item">
                                 <div class="d-flex justify-content-between">
                                     <span class="small">QUBIC Price</span>
-                                    <span class="small fw-bold" id="qubicPrice">$0.002156</span>
+                                    <span class="small fw-bold" id="qubicPriceSide">$0.002156</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Top Gainers -->
-                    <div class="card">
+                    <div class="card bg-dark">
                         <div class="card-body">
                             <h6 class="card-title text-muted mb-3">TOP GAINERS</h6>
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action border-0 py-2">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-dark border-secondary text-white py-2">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <span class="badge bg-success me-2">+18.4%</span>
@@ -188,7 +203,8 @@
                                         <span class="small fw-bold">$0.0021</span>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 py-2">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-dark border-secondary text-white py-2">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <span class="badge bg-success me-2">+12.7%</span>
@@ -197,7 +213,8 @@
                                         <span class="small fw-bold">$98.67</span>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action border-0 py-2">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action bg-dark border-secondary text-white py-2">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <span class="badge bg-success me-2">+8.3%</span>
@@ -216,7 +233,7 @@
             <div class="col-lg-8 col-xl-8">
                 <!-- Market Overview Banner -->
                 <div class="market-overview mb-4">
-                    <div class="card bg-dark-gradient border-0">
+                    <div class="card bg-dark border-0">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-8">
@@ -236,9 +253,9 @@
                                 <div class="col-md-4 text-end">
                                     <div class="price-display">
                                         <div class="text-muted small">QUBIC Price</div>
-                                        <div class="display-4 fw-bold mb-1">$0.002156</div>
+                                        <div class="display-4 fw-bold mb-1" id="mainPrice">$0.002156</div>
                                         <div class="d-flex align-items-center justify-content-end">
-                                            <span class="badge bg-success fs-6 me-2">+5.42%</span>
+                                            <span class="badge bg-success fs-6 me-2" id="priceChange">+5.42%</span>
                                             <span class="text-muted">24h change</span>
                                         </div>
                                     </div>
@@ -251,7 +268,7 @@
                 <!-- Stats Cards -->
                 <div class="row mb-4">
                     <div class="col-md-3 col-sm-6 mb-3">
-                        <div class="stats-card card h-100">
+                        <div class="stats-card card h-100 bg-dark">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
@@ -270,7 +287,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-3">
-                        <div class="stats-card card h-100">
+                        <div class="stats-card card h-100 bg-dark">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
@@ -289,7 +306,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-3">
-                        <div class="stats-card card h-100">
+                        <div class="stats-card card h-100 bg-dark">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
@@ -308,7 +325,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-3">
-                        <div class="stats-card card h-100">
+                        <div class="stats-card card h-100 bg-dark">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
@@ -329,8 +346,8 @@
                 </div>
 
                 <!-- Cryptocurrency Table -->
-                <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card mb-4 bg-dark">
+                    <div class="card-header d-flex justify-content-between align-items-center bg-dark border-secondary">
                         <h5 class="mb-0"><i class="bi bi-table me-2"></i>Cryptocurrency Prices</h5>
                         <div class="d-flex">
                             <button class="btn btn-sm btn-outline-secondary me-2" onclick="refreshTable()">
@@ -341,7 +358,7 @@
                                     data-bs-toggle="dropdown">
                                     <i class="bi bi-filter me-1"></i> Filter
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="#" onclick="filterTable('all')">All</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="filterTable('gainers')">Top
                                             Gainers</a></li>
@@ -356,7 +373,7 @@
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0" id="cryptoTable">
-                                <thead>
+                                <thead class="bg-secondary">
                                     <tr>
                                         <th class="ps-4">#</th>
                                         <th>Name</th>
@@ -380,8 +397,8 @@
                 <!-- Charts Section -->
                 <div class="row mb-4">
                     <div class="col-lg-8 mb-4">
-                        <div class="card">
-                            <div class="card-header">
+                        <div class="card bg-dark">
+                            <div class="card-header bg-dark border-secondary">
                                 <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>QUBIC Price Chart</h5>
                             </div>
                             <div class="card-body">
@@ -397,8 +414,6 @@
                                             onclick="changeChartTimeframe('3M')">3M</button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary"
                                             onclick="changeChartTimeframe('1Y')">1Y</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            onclick="changeChartTimeframe('ALL')">ALL</button>
                                     </div>
                                 </div>
                                 <canvas id="priceChart" height="300"></canvas>
@@ -406,8 +421,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-header">
+                        <div class="card h-100 bg-dark">
+                            <div class="card-header bg-dark border-secondary">
                                 <h5 class="mb-0"><i class="bi bi-lightning-charge me-2"></i>Live Trading Signals</h5>
                             </div>
                             <div class="card-body">
@@ -440,7 +455,7 @@
             <!-- Right Sidebar -->
             <div class="col-lg-2 col-xl-2 d-none d-lg-block">
                 <!-- Telegram Widget -->
-                <div class="card mb-3">
+                <div class="card mb-3 bg-dark">
                     <div class="card-body text-center">
                         <div class="mb-3">
                             <i class="bi bi-telegram display-6 text-primary"></i>
@@ -455,15 +470,17 @@
                 </div>
 
                 <!-- Price Alerts -->
-                <div class="card mb-3">
+                <div class="card mb-3 bg-dark">
                     <div class="card-body">
                         <h6 class="card-title text-muted mb-3">PRICE ALERTS</h6>
                         <div class="alert-form mb-3">
-                            <input type="text" class="form-control form-control-sm mb-2"
+                            <input type="text"
+                                class="form-control form-control-sm mb-2 bg-dark text-white border-secondary"
                                 placeholder="Symbol (e.g., QUBIC)">
-                            <input type="number" class="form-control form-control-sm mb-2"
+                            <input type="number"
+                                class="form-control form-control-sm mb-2 bg-dark text-white border-secondary"
                                 placeholder="Target Price ($)">
-                            <select class="form-select form-select-sm mb-2">
+                            <select class="form-select form-select-sm mb-2 bg-dark text-white border-secondary">
                                 <option>When price goes above</option>
                                 <option>When price goes below</option>
                             </select>
@@ -473,7 +490,7 @@
                 </div>
 
                 <!-- News & Updates -->
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-body">
                         <h6 class="card-title text-muted mb-3">QUBIC NEWS</h6>
                         <div class="news-item mb-3">
@@ -498,7 +515,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5 pt-5 border-top border-secondary">
+    <footer class="footer mt-5 pt-5 border-top border-secondary bg-dark">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 mb-4">
@@ -550,7 +567,8 @@
                     <h6 class="mb-3">Subscribe</h6>
                     <p class="small text-muted mb-3">Get the latest signals and market updates</p>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control form-control-sm" placeholder="Your email">
+                        <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary"
+                            placeholder="Your email">
                         <button class="btn btn-primary btn-sm" type="button">Subscribe</button>
                     </div>
                     <div class="small text-muted">
@@ -582,13 +600,15 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom JS -->
     <script src="js/api.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/signals.js"></script>
     <script src="js/chart.js"></script>
+    <script src="js/signals.js"></script>
+    <script src="js/table.js"></script>
 </body>
 
 </html>
